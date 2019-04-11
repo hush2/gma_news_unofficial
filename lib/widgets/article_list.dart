@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../models/articles.dart';
-import '../models/article.dart';
 import '../data.dart';
 import '../screens/article_details.dart';
+import '../models/articles.dart';
+import '../models/article.dart';
+import 'article_card.dart';
 
 class ArticleList extends StatefulWidget {
   final section;
@@ -96,7 +97,7 @@ class _ArticleListState extends State<ArticleList> {
     var cards = List<Widget>();
     for (var story in articles) {
       cards.add(InkWell(
-        child: articleCard(story),
+        child: ArticleCard(article: story),
         onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ArticleDetail(story)),
@@ -105,42 +106,6 @@ class _ArticleListState extends State<ArticleList> {
     }
     cards.add(Divider());
     return cards;
-  }
-
-  Widget articleCard(article) {
-    return Container(
-        child: Row(
-      children: <Widget>[
-        Expanded(
-          flex: 1,
-          child: CachedNetworkImage(
-            imageUrl: article.image,
-            placeholder: (context, url) => circularProgress(),
-            errorWidget: (context, url, error) => errorIcon(),
-          ),
-        ),
-        Expanded(
-          flex: 2,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  article.title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                Text(article.date),
-                Text(
-                  article.teaser,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    ));
   }
 
   Widget articleType([String colorCode, String secName]) {
@@ -239,25 +204,6 @@ class _ArticleListState extends State<ArticleList> {
           errorWidget: (context, url, error) => errorIcon(),
         ),
       ],
-    );
-  }
-
-  Widget circularProgress() {
-    return Center(
-      child: SizedBox(
-        width: 30,
-        height: 30,
-        child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.grey)),
-      ),
-    );
-  }
-
-  Widget errorIcon() {
-    return Icon(
-      Icons.warning,
-      size: 30,
-      color: Colors.yellow[700],
     );
   }
 }
