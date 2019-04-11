@@ -73,7 +73,6 @@ class _ArticleListState extends State<ArticleList> {
   }
 
   Widget articlesList(data) {
-    print(data);
     return ListView(children: generateArticleList(data));
   }
 
@@ -149,7 +148,6 @@ class _ArticleListState extends State<ArticleList> {
     Color color = sections[widget.section]['color'];
     // Only used in Featured article
     if (colorCode != null) {
-      print(colorCode);
       color = Color(int.parse('0xFF' + colorCode));
       title = secName;
     }
