@@ -7,6 +7,7 @@ import '../screens/article_details.dart';
 import '../models/articles.dart';
 import '../models/article.dart';
 import 'article_card.dart';
+import 'article_type.dart';
 
 class ArticleList extends StatefulWidget {
   final section;
@@ -80,7 +81,10 @@ class _ArticleListState extends State<ArticleList> {
   List<Widget> generateArticleList(data) {
     final cards = List<Widget>();
 
-    cards.add(articleType());
+    cards.add(ArticleType(
+      secName: data.main.secName,
+      colorCode: data.main.colorCode,
+    ));
     cards.add(mainArticle(data.main));
     if (widget.section == 'headlines') {
       cards.add(featuredArticles(data.featured));
@@ -106,29 +110,6 @@ class _ArticleListState extends State<ArticleList> {
     }
     cards.add(Divider());
     return cards;
-  }
-
-  Widget articleType([String colorCode, String secName]) {
-    String title = sections[widget.section]['title'];
-    Color color = sections[widget.section]['color'];
-    // Only used in Featured article
-    if (colorCode != null) {
-      color = Color(int.parse('0xFF' + colorCode));
-      title = secName;
-    }
-    return Container(
-        decoration: BoxDecoration(color: color),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0),
-          child: Text(
-            title.toUpperCase(),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ));
   }
 
   Widget mainArticle(article) {
@@ -195,7 +176,10 @@ class _ArticleListState extends State<ArticleList> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        articleType(article.colorCode, article.secName),
+        ArticleType(
+          secName: article.secName,
+          colorCode: article.colorCode,
+        ),
         CachedNetworkImage(
           height: 150,
           fit: BoxFit.cover,
