@@ -100,15 +100,19 @@ class _ArticleListState extends State<ArticleList> {
   articleCards(articles) {
     var cards = List<Widget>();
     for (var story in articles) {
-      cards.add(InkWell(
-        child: ArticleCard(article: story),
-        onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ArticleDetail(story)),
-            ),
+      cards.add(Column(
+        children: <Widget>[
+          Divider(),
+          InkWell(
+            child: ArticleCard(article: story),
+            onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ArticleDetail(story)),
+                ),
+          ),
+        ],
       ));
     }
-    cards.add(Divider());
     return cards;
   }
 
