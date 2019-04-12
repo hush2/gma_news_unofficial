@@ -15,6 +15,7 @@ class FeaturedArticles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         featuredArticle(context, articles[0]),
         featuredArticle(context, articles[1]),
@@ -50,6 +51,13 @@ Widget featuredCard(ArticleModel article) {
         imageUrl: article.image,
         placeholder: (context, url) => circularProgress(),
         errorWidget: (context, url, error) => errorIcon(),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(6),
+        child: Text(
+          article.title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
     ],
   );
