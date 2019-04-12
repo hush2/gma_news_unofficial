@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart' show Widget, Icon, Icons, Colors;
+import 'package:flutter/material.dart';
 
 Widget errorIcon() {
-  return Icon(
-    Icons.warning,
-    size: 30,
-    color: Colors.yellow[700],
+  return Center(
+    child: Icon(
+      Icons.warning,
+      size: 30,
+      color: Colors.yellow[700],
+    ),
   );
 }

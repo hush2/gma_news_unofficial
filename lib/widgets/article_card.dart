@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../models/article.dart';
+import 'error_icon.dart';
 
 class ArticleCard extends StatelessWidget {
   final ArticleModel article;
@@ -54,13 +55,5 @@ Widget circularProgress() {
       child: CircularProgressIndicator(
           valueColor: AlwaysStoppedAnimation<Color>(Colors.grey)),
     ),
-  );
-}
-
-Widget errorIcon() {
-  return Icon(
-    Icons.warning,
-    size: 30,
-    color: Colors.yellow[700],
   );
 }

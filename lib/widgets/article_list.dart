@@ -8,6 +8,7 @@ import '../models/articles.dart';
 import '../models/article.dart';
 import 'article_card.dart';
 import 'article_type.dart';
+import 'error_icon.dart';
 
 class ArticleList extends StatefulWidget {
   final section;
@@ -40,7 +41,6 @@ class _ArticleListState extends State<ArticleList> {
         .getSingleFile(sections[widget.section]['url'])
         .then((value) {
       return ArticlesModel.fromJson(
-//        dummy,
         value.readAsStringSync(),
         headlines: widget.section == 'headlines',
       );
