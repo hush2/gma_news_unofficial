@@ -11,7 +11,8 @@ class StoryType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var color = this.color;
-    if (color == null) {
+
+    if (color == null && colorCode != null) {
       color = Color(int.parse('0xFF' + colorCode.toUpperCase()));
     }
     return Container(
@@ -19,7 +20,7 @@ class StoryType extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 4.0),
           child: Text(
-            secName.toUpperCase(),
+            secName == null ? '' : secName.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
