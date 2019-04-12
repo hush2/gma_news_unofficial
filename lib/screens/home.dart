@@ -15,7 +15,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String section = 'headlines';
 
-  drawerItemTapped(section) {
+  _drawerItemTapped(section) {
     setState(() {
       Navigator.pop(context);
       this.section = section.toLowerCase();
@@ -26,9 +26,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      drawer: AppDrawer(drawerItemTapped),
+      drawer: AppDrawer(onItemTap: _drawerItemTapped),
       body: ArticleList(section: section),
-//        body: null,
     );
   }
 }

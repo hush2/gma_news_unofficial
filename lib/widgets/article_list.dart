@@ -24,9 +24,8 @@ class _ArticleListState extends State<ArticleList> {
 
   @override
   void initState() {
-    super.initState();
-
     futureData = fetchData();
+    super.initState();
   }
 
   void didUpdateWidget(ArticleList oldWidget) {
@@ -45,14 +44,6 @@ class _ArticleListState extends State<ArticleList> {
         headlines: widget.section == 'headlines',
       );
     });
-
-//    return http.get(sections[widget.section]['url']).then((response) {
-//      if (response.statusCode == 200) {
-//        return ArticlesModel.fromJson(response.body);
-//      } else {
-//        throw Exception();
-//      }
-//    });
   }
 
   @override
@@ -75,10 +66,10 @@ class _ArticleListState extends State<ArticleList> {
   }
 
   Widget articlesList(data) {
-    return ListView(children: generateArticleList(data));
+    return ListView(children: _generateArticleList(data));
   }
 
-  List<Widget> generateArticleList(data) {
+  List<Widget> _generateArticleList(data) {
     final cards = List<Widget>();
 
     cards.add(ArticleType(
@@ -88,8 +79,20 @@ class _ArticleListState extends State<ArticleList> {
     cards.add(mainArticle(data.main));
     if (widget.section == 'headlines') {
       cards.add(featuredArticles(data.featured));
+      cards.add(ArticleType(
+        secName: 'JUST IN',
+        color: sections['news']['color'],
+      ));
       cards.addAll(articleCards(data.justIn));
+      cards.add(ArticleType(
+        secName: 'TOP PICKS',
+        color: sections['news']['color'],
+      ));
       cards.addAll(articleCards(data.topPicks));
+      cards.add(ArticleType(
+        secName: 'TRENDING',
+        color: sections['news']['color'],
+      ));
       cards.addAll(articleCards(data.trending));
     } else {
       cards.addAll(articleCards(data.stories));
