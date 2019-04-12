@@ -1,24 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../models/article.dart';
-import '../screens/article_details.dart';
+import '../models/story.dart';
+import '../screens/story_detail.dart';
 import 'circular_progress.dart';
 import 'error_icon.dart';
-import 'article_type.dart';
+import 'story_type.dart';
 
-class FeaturedArticles extends StatelessWidget {
-  final List<ArticleModel> articles;
+class FeaturedStories extends StatelessWidget {
+  final List<StoryModel> stories;
 
-  FeaturedArticles({Key key, this.articles}) : super(key: key);
+  FeaturedStories({Key key, this.stories}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        featuredArticle(context, articles[0]),
-        featuredArticle(context, articles[1]),
+        featuredArticle(context, stories[0]),
+        featuredArticle(context, stories[1]),
       ],
     );
   }
@@ -31,17 +31,17 @@ Widget featuredArticle(context, article) {
       child: featuredCard(article),
       onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ArticleDetail(article)),
+            MaterialPageRoute(builder: (context) => StoryDetail(article)),
           ),
     ),
   );
 }
 
-Widget featuredCard(ArticleModel article) {
+Widget featuredCard(StoryModel article) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: <Widget>[
-      ArticleType(
+      StoryType(
         secName: article.secName,
         colorCode: article.colorCode,
       ),

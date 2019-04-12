@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ArticleType extends StatelessWidget {
+class StoryType extends StatelessWidget {
   final String secName;
   final String colorCode;
   final Color color;
 
-  ArticleType({Key key, this.secName, this.colorCode, this.color})
+  StoryType({Key key, this.secName, this.colorCode, this.color})
       : super(key: key);
 
   @override

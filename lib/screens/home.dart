@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/app_drawer.dart';
-import '../widgets/article_list.dart';
+import '../widgets/story_list.dart';
 
 class Home extends StatefulWidget {
   Home({Key key, this.title}) : super(key: key);
@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       drawer: AppDrawer(onItemTap: _drawerItemTapped),
-      body: ArticleList(section: section),
+      body: StoryList(section: section),
     );
   }
 }

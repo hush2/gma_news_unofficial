@@ -1,4 +1,4 @@
-class ArticleModel {
+class StoryModel {
   final String title;
   final String main;
   final String teaser;
@@ -7,7 +7,7 @@ class ArticleModel {
   final String secName; // Category
   final String colorCode;
 
-  ArticleModel({
+  StoryModel({
     this.title,
     this.main,
     this.teaser,

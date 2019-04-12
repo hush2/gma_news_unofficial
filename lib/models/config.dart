@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class SconfigModel {
+class ConfigModel {
   Map<String, dynamic> _forex = {};
   List<dynamic> _lotto = [];
 
@@ -8,7 +8,7 @@ class SconfigModel {
 
   get lotto => _lotto;
 
-  SconfigModel.fromJson(String json) {
+  ConfigModel.fromJson(String json) {
     var jsonObj = jsonDecode(json);
     _forex = jsonObj['forex'];
     _lotto = jsonObj['lotto'];

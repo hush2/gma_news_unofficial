@@ -3,7 +3,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../data.dart';
-import '../models/sconfig.dart';
+import '../models/config.dart';
 import 'error_icon.dart';
 import 'lotto.dart';
 import 'forex.dart';
@@ -18,7 +18,7 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  Future<SconfigModel> futureData;
+  Future<ConfigModel> futureData;
 
   @override
   void initState() {
@@ -28,9 +28,9 @@ class _AppDrawerState extends State<AppDrawer> {
 
   _fetchData() {
     return DefaultCacheManager()
-        .getSingleFile(sections['sconfig']['url'])
+        .getSingleFile(sections['config']['url'])
         .then((value) {
-      return SconfigModel.fromJson(value.readAsStringSync());
+      return ConfigModel.fromJson(value.readAsStringSync());
     });
   }
 
@@ -63,7 +63,7 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   _buildDrawerHeader() {
-    return FutureBuilder<SconfigModel>(
+    return FutureBuilder<ConfigModel>(
         future: futureData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {

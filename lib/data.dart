@@ -5,7 +5,7 @@ const base = 'https://data.gmanews.tv/zgmanews_contents/';
 const page = 1;
 
 const sections = {
-  'sconfig': {
+  'config': {
     'url': '${base}specialconfig_v1.json.gz',
   },
   'headlines': {

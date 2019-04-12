@@ -3,25 +3,25 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../data.dart';
-import '../screens/article_details.dart';
-import '../models/articles.dart';
+import '../screens/story_detail.dart';
+import '../models/stories.dart';
 import 'error_icon.dart';
 import 'circular_progress.dart';
-import 'article_card.dart';
-import 'article_type.dart';
+import 'story_card.dart';
+import 'story_type.dart';
 import 'featured.dart';
 
-class ArticleList extends StatefulWidget {
+class StoryList extends StatefulWidget {
   final section;
 
-  ArticleList({Key key, this.section}) : super(key: key);
+  StoryList({Key key, this.section}) : super(key: key);
 
   @override
-  _ArticleListState createState() => _ArticleListState();
+  _StoryListState createState() => _StoryListState();
 }
 
-class _ArticleListState extends State<ArticleList> {
-  Future<ArticlesModel> futureData;
+class _StoryListState extends State<StoryList> {
+  Future<StoriesModel> futureData;
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _ArticleListState extends State<ArticleList> {
     super.initState();
   }
 
-  void didUpdateWidget(ArticleList oldWidget) {
+  void didUpdateWidget(StoryList oldWidget) {
     if (oldWidget.section != widget.section) {
       futureData = fetchData();
     }
@@ -40,7 +40,7 @@ class _ArticleListState extends State<ArticleList> {
     return DefaultCacheManager()
         .getSingleFile(sections[widget.section]['url'])
         .then((value) {
-      return ArticlesModel.fromJson(
+      return StoriesModel.fromJson(
         value.readAsStringSync(),
         headlines: widget.section == 'headlines',
       );
@@ -50,12 +50,12 @@ class _ArticleListState extends State<ArticleList> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: FutureBuilder<ArticlesModel>(
+      child: FutureBuilder<StoriesModel>(
           future: futureData,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
-                return articlesList(snapshot.data);
+                return storyList(snapshot.data);
               }
               if (snapshot.hasError) {
                 return errorIcon();
@@ -66,52 +66,52 @@ class _ArticleListState extends State<ArticleList> {
     );
   }
 
-  Widget articlesList(data) {
-    return ListView(children: _generateArticleList(data));
+  Widget storyList(data) {
+    return ListView(children: _generateStoryList(data));
   }
 
-  List<Widget> _generateArticleList(data) {
+  List<Widget> _generateStoryList(data) {
     final cards = List<Widget>();
 
-    cards.add(ArticleType(
+    cards.add(StoryType(
       secName: data.main.secName,
       colorCode: data.main.colorCode,
     ));
-    cards.add(mainArticle(data.main));
+    cards.add(mainStory(data.main));
     if (widget.section == 'headlines') {
-      cards.add(FeaturedArticles(articles: data.featured));
-      cards.add(ArticleType(
+      cards.add(FeaturedStories(stories: data.featured));
+      cards.add(StoryType(
         secName: 'JUST IN',
         color: sections['news']['color'],
       ));
-      cards.addAll(articleCards(data.justIn));
-      cards.add(ArticleType(
+      cards.addAll(storyCards(data.justIn));
+      cards.add(StoryType(
         secName: 'TOP PICKS',
         color: sections['news']['color'],
       ));
-      cards.addAll(articleCards(data.topPicks));
-      cards.add(ArticleType(
+      cards.addAll(storyCards(data.topPicks));
+      cards.add(StoryType(
         secName: 'TRENDING',
         color: sections['news']['color'],
       ));
-      cards.addAll(articleCards(data.trending));
+      cards.addAll(storyCards(data.trending));
     } else {
-      cards.addAll(articleCards(data.stories));
+      cards.addAll(storyCards(data.stories));
     }
     return cards;
   }
 
-  articleCards(articles) {
+  storyCards(stories) {
     var cards = List<Widget>();
-    for (var story in articles) {
+    for (var story in stories) {
       cards.add(Column(
         children: <Widget>[
           Divider(),
           InkWell(
-            child: ArticleCard(article: story),
+            child: StoryCard(story: story),
             onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ArticleDetail(story)),
+                  MaterialPageRoute(builder: (context) => StoryDetail(story)),
                 ),
           ),
         ],
@@ -120,16 +120,16 @@ class _ArticleListState extends State<ArticleList> {
     return cards;
   }
 
-  Widget mainArticle(article) {
+  Widget mainStory(story) {
     return InkWell(
       onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ArticleDetail(article)),
+            MaterialPageRoute(builder: (context) => StoryDetail(story)),
           ),
       child: Stack(
         children: <Widget>[
           CachedNetworkImage(
-            imageUrl: article.image,
+            imageUrl: story.image,
             placeholder: (context, url) => circularProgress(),
             errorWidget: (context, url, error) => errorIcon(),
           ),
@@ -142,7 +142,7 @@ class _ArticleListState extends State<ArticleList> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  article.title,
+                  story.title,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
