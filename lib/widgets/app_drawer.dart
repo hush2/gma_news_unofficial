@@ -79,13 +79,18 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   PageView _buildPageView(data) {
-    return PageView(
-      children: <Widget>[
-        Lotto(data.lotto, 0),
-        Lotto(data.lotto, 1),
-        Forex(data.forex),
-      ],
-    );
+    List<Widget> pages = [];
+
+    if (data.lotto.length == 2) {
+      pages.add(Lotto(data.lotto, 0));
+      pages.add(Lotto(data.lotto, 1));
+    } else if (data.lotto.length == 1) {
+      pages.add(Lotto(data.lotto, 0));
+    } else {
+      pages.add(Center(child: Text('NO DATA')));
+    }
+    pages.add(Forex(data.forex));
+    return PageView(children: pages);
   }
 
   _buildDrawerItem(String section) {
