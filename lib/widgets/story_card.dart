@@ -12,38 +12,48 @@ class StoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Row(
-      children: <Widget>[
-        Expanded(
-          flex: 1,
-          child: CachedNetworkImage(
-            imageUrl: story.image,
-            placeholder: (context, url) => circularProgress(),
-            errorWidget: (context, url, error) => errorIcon(),
-          ),
-        ),
-        Expanded(
-          flex: 2,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  story.title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                Text(story.date),
-                Text(
-                  story.teaser,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: AspectRatio(
+              child: CachedNetworkImage(
+                imageUrl: story.image,
+                fit: BoxFit.fitHeight,
+                placeholder: (context, url) => circularProgress(),
+                errorWidget: (context, url, error) => errorIcon(),
+              ),
+              aspectRatio: 4 / 3,
             ),
           ),
-        ),
-      ],
-    ));
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding: EdgeInsets.only(left: 10, bottom: 10),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    story.title,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 6.0),
+                    child: Text(
+                      story.teaser,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(story.date),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
