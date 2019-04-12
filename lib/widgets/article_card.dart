@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../models/article.dart';
+import 'circular_progress.dart';
 import 'error_icon.dart';
 
 class ArticleCard extends StatelessWidget {
@@ -45,15 +46,4 @@ class ArticleCard extends StatelessWidget {
       ],
     ));
   }
-}
-
-Widget circularProgress() {
-  return Center(
-    child: SizedBox(
-      width: 30,
-      height: 30,
-      child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.grey)),
-    ),
-  );
 }

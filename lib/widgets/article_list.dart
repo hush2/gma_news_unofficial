@@ -5,10 +5,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../data.dart';
 import '../screens/article_details.dart';
 import '../models/articles.dart';
-import '../models/article.dart';
+import 'error_icon.dart';
+import 'circular_progress.dart';
 import 'article_card.dart';
 import 'article_type.dart';
-import 'error_icon.dart';
+import 'featured.dart';
 
 class ArticleList extends StatefulWidget {
   final section;
@@ -78,7 +79,7 @@ class _ArticleListState extends State<ArticleList> {
     ));
     cards.add(mainArticle(data.main));
     if (widget.section == 'headlines') {
-      cards.add(featuredArticles(data.featured));
+      cards.add(FeaturedArticles(articles: data.featured));
       cards.add(ArticleType(
         secName: 'JUST IN',
         color: sections['news']['color'],
@@ -154,47 +155,6 @@ class _ArticleListState extends State<ArticleList> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget featuredArticles(articles) {
-    return Row(
-      children: <Widget>[
-        featuredArticle(articles[0]),
-        featuredArticle(articles[1]),
-      ],
-    );
-  }
-
-  Widget featuredArticle(article) {
-    return Expanded(
-      flex: 1,
-      child: InkWell(
-        child: featuredCard(article),
-        onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ArticleDetail(article)),
-            ),
-      ),
-    );
-  }
-
-  Widget featuredCard(ArticleModel article) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        ArticleType(
-          secName: article.secName,
-          colorCode: article.colorCode,
-        ),
-        CachedNetworkImage(
-          height: 150,
-          fit: BoxFit.cover,
-          imageUrl: article.image,
-          placeholder: (context, url) => circularProgress(),
-          errorWidget: (context, url, error) => errorIcon(),
-        ),
-      ],
     );
   }
 }
