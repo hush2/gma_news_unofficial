@@ -21,37 +21,35 @@ class StoryList extends StatefulWidget {
 }
 
 class _StoryListState extends State<StoryList> {
-  Future<StoriesModel> futureData;
+  Future<StoriesModel> _futureData;
 
   @override
   void initState() {
-    futureData = fetchData();
+    _futureData = _fetchData();
     super.initState();
   }
 
   void didUpdateWidget(StoryList oldWidget) {
     if (oldWidget.section != widget.section) {
-      futureData = fetchData();
+      _futureData = _fetchData();
     }
     super.didUpdateWidget(oldWidget);
   }
 
-  fetchData() {
-    return DefaultCacheManager()
-        .getSingleFile(sections[widget.section]['url'])
-        .then((value) {
-      return StoriesModel.fromJson(
-        value.readAsStringSync(),
-        headlines: widget.section == 'headlines',
-      );
-    });
+  Future<StoriesModel> _fetchData() async {
+    var data = await DefaultCacheManager()
+        .getSingleFile(sections[widget.section]['url']);
+    return StoriesModel.fromJson(
+      data.readAsStringSync(),
+      headlines: widget.section == 'headlines',
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder<StoriesModel>(
-          future: futureData,
+          future: _futureData,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {

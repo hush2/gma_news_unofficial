@@ -18,20 +18,18 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  Future<ConfigModel> futureData;
+  Future<ConfigModel> _futureData;
 
   @override
   void initState() {
-    futureData = _fetchData();
+    _futureData = _fetchData();
     super.initState();
   }
 
-  _fetchData() {
-    return DefaultCacheManager()
-        .getSingleFile(sections['config']['url'])
-        .then((value) {
-      return ConfigModel.fromJson(value.readAsStringSync());
-    });
+  Future<ConfigModel> _fetchData() async {
+    var data =
+        await DefaultCacheManager().getSingleFile(sections['config']['url']);
+    return ConfigModel.fromJson(data.readAsStringSync());
   }
 
   @override
@@ -64,7 +62,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
   _buildDrawerHeader() {
     return FutureBuilder<ConfigModel>(
-        future: futureData,
+        future: _futureData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
