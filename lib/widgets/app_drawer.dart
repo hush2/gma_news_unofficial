@@ -81,14 +81,10 @@ class _AppDrawerState extends State<AppDrawer> {
   PageView _buildPageView(data) {
     List<Widget> pages = [];
 
-    if (data.lotto.length == 2) {
-      pages.add(Lotto(data.lotto, 0));
-      pages.add(Lotto(data.lotto, 1));
-    } else if (data.lotto.length == 1) {
-      pages.add(Lotto(data.lotto, 0));
-    } else {
-      pages.add(Center(child: Text('NO DATA')));
-    }
+    data.lotto.asMap().forEach((index, value) {
+      pages.add(Lotto(data.lotto, index));
+    });
+
     pages.add(Forex(data.forex));
     return PageView(children: pages);
   }
