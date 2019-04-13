@@ -3,48 +3,41 @@ import 'dart:convert';
 import 'story.dart';
 
 class StoriesModel {
-  StoryModel _main;
-  List<StoryModel> _stories = [];
-  List<StoryModel> _featured = [];
-  List<StoryModel> _justIn = [];
-  List<StoryModel> _topPicks = [];
-  List<StoryModel> _trending = [];
-
-  StoryModel get main => _main;
-  List<StoryModel> get stories => _stories;
-  List<StoryModel> get featured => _featured;
-  List<StoryModel> get justIn => _justIn;
-  List<StoryModel> get topPicks => _topPicks;
-  List<StoryModel> get trending => _trending;
+  StoryModel main;
+  List<StoryModel> stories = [];
+  List<StoryModel> featured = [];
+  List<StoryModel> justIn = [];
+  List<StoryModel> topPicks = [];
+  List<StoryModel> trending = [];
 
   StoriesModel.fromJson(String json, {headlines = false}) {
     var jsonObj = jsonDecode(json);
 
     if (headlines) {
-      _main = storyModel(jsonObj['headlines'])[0];
-      _featured = storyModel(jsonObj['featured_stories']);
-      _justIn = storyModel(jsonObj['just_in']);
-      _topPicks = storyModel(jsonObj['top_picks']);
-      _trending = storyModel(jsonObj['trending']);
+      main = _storyModel(jsonObj['headlines'])[0];
+      featured = _storyModel(jsonObj['featured_stories']);
+      justIn = _storyModel(jsonObj['just_in']);
+      topPicks = _storyModel(jsonObj['top_picks']);
+      trending = _storyModel(jsonObj['trending']);
     } else {
-      _main = storyModel(jsonObj['main'])[0];
-      _stories = storyModel(jsonObj['stories']);
+      main = _storyModel(jsonObj['main'])[0];
+      stories = _storyModel(jsonObj['stories']);
     }
   }
 }
 
-storyModel(stories) {
+_storyModel(stories) {
   List<StoryModel> _stories = [];
-  stories.forEach((item) {
+  for (var story in stories) {
     _stories.add(new StoryModel(
-      title: item['title'],
-      main: item['main'],
-      teaser: item['teaser'],
-      date: item['date'],
-      image: item['base_url'] + item['base_filename'],
-      secName: item['sec_name'],
-      colorCode: item['color_code'],
+      title: story['title'],
+      main: story['main'],
+      teaser: story['teaser'],
+      date: story['date'],
+      image: story['base_url'] + story['base_filename'],
+      secName: story['sec_name'],
+      colorCode: story['color_code'],
     ));
-  });
+  }
   return _stories;
 }

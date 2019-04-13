@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LottoNumbers extends StatelessWidget {
   final List<dynamic> results;
 
-  LottoNumbers(this.results);
+  LottoNumbers(this.results, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

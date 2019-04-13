@@ -1,16 +1,12 @@
 import 'dart:convert';
 
 class ConfigModel {
-  Map<String, dynamic> _forex = {};
-  List<dynamic> _lotto = [];
-
-  get forex => _forex;
-
-  get lotto => _lotto;
+  Map<String, dynamic> forex = {};
+  List<dynamic> lotto = [];
 
   ConfigModel.fromJson(String json) {
     var jsonObj = jsonDecode(json);
-    _forex = jsonObj['forex'];
-    _lotto = jsonObj['lotto'];
+    forex = jsonObj['forex'];
+    lotto = jsonObj['lotto'];
   }
 }

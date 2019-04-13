@@ -7,7 +7,7 @@ import '../models/story.dart';
 class StoryDetail extends StatelessWidget {
   final StoryModel story;
 
-  StoryDetail(this.story);
+  StoryDetail(this.story, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

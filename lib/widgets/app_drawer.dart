@@ -84,7 +84,6 @@ class _AppDrawerState extends State<AppDrawer> {
     data.lotto.asMap().forEach((index, value) {
       pages.add(Lotto(data.lotto, index));
     });
-
     pages.add(Forex(data.forex));
     return PageView(children: pages);
   }
