@@ -104,7 +104,6 @@ class _StoryListState extends State<StoryList> {
     for (var story in stories) {
       cards.add(Column(
         children: <Widget>[
-          Divider(),
           InkWell(
             child: StoryCard(story: story),
             onTap: () => Navigator.push(
@@ -112,6 +111,7 @@ class _StoryListState extends State<StoryList> {
                   MaterialPageRoute(builder: (context) => StoryDetail(story)),
                 ),
           ),
+          Divider(),
         ],
       ));
     }
