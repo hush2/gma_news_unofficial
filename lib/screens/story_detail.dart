@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:intl/intl.dart';
 
 import '../models/story.dart';
 
@@ -15,6 +16,8 @@ class StoryDetail extends StatelessWidget {
     if (story.colorCode != null) {
       colorCode = Color(int.parse('0xFF' + story.colorCode.toUpperCase()));
     }
+    var df = DateFormat("EEEE, MMMM d, y h:m a");
+    var date = df.format(DateTime.parse(story.date));
 
     return Scaffold(
       appBar: AppBar(
@@ -31,9 +34,17 @@ class StoryDetail extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            child: Text(
-              story.title,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            child: Column(
+              children: <Widget>[
+                Text(
+                  story.title,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(date),
+                ),
+              ],
             ),
           ),
           Html(
