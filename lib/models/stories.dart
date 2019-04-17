@@ -4,6 +4,7 @@ import 'story.dart';
 
 class StoriesModel {
   StoryModel main;
+  StoryModel _main;
   List<StoryModel> stories = [];
   List<StoryModel> featured = [];
   List<StoryModel> justIn = [];
@@ -15,29 +16,31 @@ class StoriesModel {
 
     if (headlines) {
       main = _storyModel(jsonObj['headlines'])[0];
+      _main = main;
       featured = _storyModel(jsonObj['featured_stories']);
       justIn = _storyModel(jsonObj['just_in']);
       topPicks = _storyModel(jsonObj['top_picks']);
       trending = _storyModel(jsonObj['trending']);
     } else {
       main = _storyModel(jsonObj['main'])[0];
+      _main = main;
       stories = _storyModel(jsonObj['stories']);
     }
   }
-}
 
-_storyModel(stories) {
-  List<StoryModel> _stories = [];
-  for (var story in stories) {
-    _stories.add(new StoryModel(
-      title: story['title'],
-      main: story['main'],
-      teaser: story['teaser'],
-      date: story['date'],
-      image: story['base_url'] + story['base_filename'],
-      secName: story['sec_name'],
-      colorCode: story['color_code'],
-    ));
+  _storyModel(stories) {
+    List<StoryModel> _stories = [];
+    for (var story in stories) {
+      _stories.add(new StoryModel(
+        title: story['title'],
+        main: story['main'],
+        teaser: story['teaser'],
+        date: story['date'],
+        image: story['base_url'] + story['base_filename'],
+        secName: story['sec_name'],
+        colorCode: story['color_code'] ?? _main.colorCode,
+      ));
+    }
+    return _stories;
   }
-  return _stories;
 }

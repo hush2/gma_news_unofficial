@@ -11,9 +11,15 @@ class StoryDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var colorCode;
+    if (story.colorCode != null) {
+      colorCode = Color(int.parse('0xFF' + story.colorCode.toUpperCase()));
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(story.secName),
+        backgroundColor: colorCode,
       ),
       body: ListView(
         children: <Widget>[
