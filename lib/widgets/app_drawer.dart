@@ -89,7 +89,7 @@ class _AppDrawerState extends State<AppDrawer> {
   _buildDrawerItem(String section) {
     return ListTile(
       leading: Padding(
-        padding: const EdgeInsets.only(left: 10.0),
+        padding: EdgeInsets.only(left: 10.0),
         child: Icon(
           sections[section]['icon'],
           color: sections[section]['color'],
@@ -111,7 +111,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
   _githubLink() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(8.0),
       child: GestureDetector(
         child: Text(
           hushLink,

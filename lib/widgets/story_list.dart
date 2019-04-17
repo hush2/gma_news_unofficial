@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../data.dart';
 import '../screens/story_detail.dart';
@@ -132,13 +133,30 @@ class _StoryListState extends State<StoryList> {
             errorWidget: (context, url, error) => errorIcon(),
           ),
           Positioned(
+            top: 0,
+            right: 0,
+            child: Container(
+              decoration: BoxDecoration(color: Color(0x77000000)),
+              child: Padding(
+                padding: EdgeInsets.all(4),
+                child: Text(
+                  timeago.format(DateTime.parse(story.date)),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: Container(
               decoration: BoxDecoration(color: Color(0x77000000)),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   story.title,
                   textAlign: TextAlign.center,

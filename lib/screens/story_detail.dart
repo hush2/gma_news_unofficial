@@ -30,7 +30,7 @@ class StoryDetail extends StatelessWidget {
             errorWidget: (context, url, error) => Icon(Icons.error),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             child: Text(
               story.title,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

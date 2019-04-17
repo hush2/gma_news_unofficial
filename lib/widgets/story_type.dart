@@ -18,7 +18,7 @@ class StoryType extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(color: color),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          padding: EdgeInsets.symmetric(vertical: 4.0),
           child: Text(
             secName == null ? '' : secName.toUpperCase(),
             textAlign: TextAlign.center,

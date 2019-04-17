@@ -1,5 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../models/story.dart';
 import 'circular_progress.dart';
@@ -13,7 +14,7 @@ class StoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -40,14 +41,17 @@ class StoryCard extends StatelessWidget {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 6.0),
+                    padding: EdgeInsets.symmetric(vertical: 6),
                     child: Text(
                       story.teaser,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  Text(story.date),
+                  Text(
+                    timeago.format(DateTime.parse(story.date)),
+                    style: TextStyle(color: Colors.grey[600]),
+                  ),
                 ],
               ),
             ),
