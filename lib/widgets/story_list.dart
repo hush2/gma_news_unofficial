@@ -66,7 +66,15 @@ class _StoryListState extends State<StoryList> {
   }
 
   Widget storyList(data) {
-    return ListView(children: _generateStoryList(data));
+    return RefreshIndicator(
+      child: ListView(children: _generateStoryList(data)),
+      onRefresh: () {
+        setState(() {
+          _futureData = _fetchData();
+        });
+        return Future<Null>.value();
+      },
+    );
   }
 
   List<Widget> _generateStoryList(data) {
