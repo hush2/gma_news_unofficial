@@ -22,10 +22,22 @@ class _HomeState extends State<Home> {
     });
   }
 
+  var _appBarTitle = Row(
+    children: <Widget>[
+      Text("GMA ", style: TextStyle(color: Colors.blue[800])),
+      Text("NEWS ", style: TextStyle(color: Colors.red)),
+      Text("UNOFFICIAL", style: TextStyle(color: Colors.black)),
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: _appBarTitle,
+        backgroundColor: Colors.white,
+        iconTheme: new IconThemeData(color: Colors.black),
+      ),
       drawer: AppDrawer(onItemTap: _drawerItemTapped),
       body: StoryList(section: section),
     );
