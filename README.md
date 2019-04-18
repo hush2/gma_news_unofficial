@@ -6,10 +6,12 @@ An older React Native version is [here](https://github.com/hush2/gma-news-unoffi
 
 ## screen shots
 
-<img src="https://hush2.bitbucket.io/images/screenshots/gma_news_unofficial/large1.png" width="240">
-<img src="https://hush2.bitbucket.io/images/screenshots/gma_news_unofficial/large4.png" width="240">
-<img src="https://hush2.bitbucket.io/images/screenshots/gma_news_unofficial/large2.png" width="240">
-<img src="https://hush2.bitbucket.io/images/screenshots/gma_news_unofficial/large3.png" width="240">
+<p float="left">
+	<img src="https://hush2.bitbucket.io/images/screenshots/gma_news_unofficial/large1.png" width="240">
+	<img src="https://hush2.bitbucket.io/images/screenshots/gma_news_unofficial/large4.png" width="240">
+	<img src="https://hush2.bitbucket.io/images/screenshots/gma_news_unofficial/large2.png" width="240">
+	<img src="https://hush2.bitbucket.io/images/screenshots/gma_news_unofficial/large3.png" width="240">
+</p>
 
 ## packages used
 
