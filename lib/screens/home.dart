@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
 
 import '../widgets/app_drawer.dart';
 import '../widgets/story_list.dart';
@@ -34,6 +35,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        brightness: Platform.isIOS ? Brightness.light : Brightness.dark,
         title: _appBarTitle,
         backgroundColor: Colors.white,
         iconTheme: new IconThemeData(color: Colors.black),
